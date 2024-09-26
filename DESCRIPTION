@@ -1,0 +1,35 @@
+Package: basicspace
+Version: 0.25
+Title: Recovering a Basic Space from Issue Scales
+Authors@R: c(person(given = "Keith",
+                    family = "Poole",
+                    role = "aut",
+                    email = "ktpoole@uga.edu"),
+             person(given = "Howard",
+                    family = "Rosenthal",
+                    role = "aut",
+                    email = "hr31@nyu.edu"),
+             person(given = "Jeffrey",
+                    family = "Lewis",
+                    role = "aut",
+                    email = "jblewis@ucla.edu"),
+             person(given = "James",
+                    family = "Lo",
+                    role = c("aut"),
+                    email = "lojames@usc.edu"),
+             person(given = "Royce",
+                    family = "Carroll",
+                    role = "aut",
+                    email = "rcarroll@rice.edu"), 
+             person(given = "Dave", 
+                    family = "Armstrong", 
+                    role = "cre", 
+                    email = "davearmstrong.ps@gmail.com"))
+Depends: R (>= 3.0.0), tools (>= 2.0.0)
+Description: Conducts Aldrich-McKelvey and Blackbox Scaling (Poole et al 2016)
+		<doi:10.18637/jss.v069.i07> to recover latent dimensions of judgment.
+License: GPL (>= 2)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+LazyData: true
