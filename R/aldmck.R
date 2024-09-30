@@ -152,7 +152,7 @@ aldmck <- function(data, respondent = 0, missing=NULL, polarity, verbose=FALSE) 
 
 
   ### Send the data to Fortran ###
-  res <- .Fortran("mckalnew",
+  res <- mckalnew_wrapper(
                   as.integer(N), 			# NRESPONDENTS
                   as.integer(NQ+1),	 		# NISSUES
                   as.integer(NRESP),  		# NSELFPOS

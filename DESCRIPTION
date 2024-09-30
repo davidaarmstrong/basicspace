@@ -26,6 +26,8 @@ Authors@R: c(person(given = "Keith",
                     role = "cre", 
                     email = "davearmstrong.ps@gmail.com"))
 Depends: R (>= 3.0.0), tools (>= 2.0.0)
+Imports: Rcpp (>= 1.0.5)
+LinkingTo: Rcpp, RcppEigen
 Description: Conducts Aldrich-McKelvey and Blackbox Scaling (Poole et al 2016)
 		<doi:10.18637/jss.v069.i07> to recover latent dimensions of judgment.
 License: GPL (>= 2)

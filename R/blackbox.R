@@ -122,7 +122,7 @@ blackbox <- function(data,missing=NULL,verbose=FALSE,dims=1,minscale){
 
   }
 
-  res <- .Fortran("blackboxf",
+  res <- blackboxf_wrapper(
                   as.integer(N),			# NRESPONDENTS
                   as.integer(NQ),			# NISSUES
                   as.integer(dims),		# NDIMENSIONS, check later about mods

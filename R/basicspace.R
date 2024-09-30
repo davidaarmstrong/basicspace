@@ -7,6 +7,7 @@
 #' The main functions are `aldmck()` and `blackbox()` and `blackbox_transpose()`.
 #'
 #' @import tools
+#' @importRcpp
 #' @importFrom grDevices palette
 #' @importFrom graphics abline arrows hist mtext par plot points segments text
 #' @importFrom stats cor density ecdf quantile
