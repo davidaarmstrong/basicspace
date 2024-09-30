@@ -56,18 +56,17 @@ void BLACKBT(
     Eigen::VectorXd& FITS2           // FITS2(6)
 );
 
-void CORR2(
-    int NRESPONDENTS,
-    int NISSUES,
-    int NP,
-    int NY,
-    const std::vector<std::vector<double>>& X,
-    std::vector<std::vector<double>>& R,
-    std::vector<int>& LL,
-    std::vector<int>& MPOS,
-    int& KS,
-    int& KPOS,
-    int IPRNT);
+void CORR2(int NRESPONDENTS,
+           int NISSUES,
+           int NP,
+           int NY,
+           Eigen::MatrixXd& X,         // X(NRESPONDENTS, NISSUES)
+           Eigen::MatrixXd& R,         // R(NISSUES, NISSUES)
+           Eigen::VectorXi& LL,        // LL(NISSUES)
+           Eigen::VectorXi& MPOS,      // MPOS(NISSUES)
+           int KS,
+           int KPOS,
+           int IPRNT);
 
 void CORR3(
     int NRESPONDENTS,

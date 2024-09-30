@@ -125,7 +125,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // CORR2
-void CORR2(int NRESPONDENTS, int NISSUES, int NP, int NY, const std::vector<double>& X, std::vector<double>& R, std::vector<int>& LL, std::vector<int>& MPOS, int& KS, int& KPOS, int IPRNT);
+void CORR2(int NRESPONDENTS, int NISSUES, int NP, int NY, Eigen::MatrixXd& X, Eigen::MatrixXd& R, Eigen::VectorXi& LL, Eigen::VectorXi& MPOS, int& KS, int& KPOS, int IPRNT);
 RcppExport SEXP _basicspace_CORR2(SEXP NRESPONDENTSSEXP, SEXP NISSUESSEXP, SEXP NPSEXP, SEXP NYSEXP, SEXP XSEXP, SEXP RSEXP, SEXP LLSEXP, SEXP MPOSSEXP, SEXP KSSEXP, SEXP KPOSSEXP, SEXP IPRNTSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -133,10 +133,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type NISSUES(NISSUESSEXP);
     Rcpp::traits::input_parameter< int >::type NP(NPSEXP);
     Rcpp::traits::input_parameter< int >::type NY(NYSEXP);
-    Rcpp::traits::input_parameter< const std::vector<double>& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< std::vector<double>& >::type R(RSEXP);
-    Rcpp::traits::input_parameter< std::vector<int>& >::type LL(LLSEXP);
-    Rcpp::traits::input_parameter< std::vector<int>& >::type MPOS(MPOSSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type R(RSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXi& >::type LL(LLSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXi& >::type MPOS(MPOSSEXP);
     Rcpp::traits::input_parameter< int& >::type KS(KSSEXP);
     Rcpp::traits::input_parameter< int& >::type KPOS(KPOSSEXP);
     Rcpp::traits::input_parameter< int >::type IPRNT(IPRNTSEXP);

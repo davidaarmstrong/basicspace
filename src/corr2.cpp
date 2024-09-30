@@ -5,19 +5,19 @@ using namespace Rcpp;
 
 // Function to perform the correlation calculations
 // [[Rcpp::export]]
-void CORR2(
-    int NRESPONDENTS,
-    int NISSUES,
-    int NP,
-    int NY,
-    const std::vector<double>& X,
-    std::vector<double>& R,
-    std::vector<int>& LL,
-    std::vector<int>& MPOS,
-    int& KS,
-    int& KPOS,
-    int IPRNT)
-{
+void CORR2(int NRESPONDENTS,
+           int NISSUES,
+           int NP,
+           int NY,
+           Eigen::MatrixXd& X,         // X(NRESPONDENTS, NISSUES)
+           Eigen::MatrixXd& R,         // R(NISSUES, NISSUES)
+           Eigen::VectorXi& LL,        // LL(NISSUES)
+           Eigen::VectorXi& MPOS,      // MPOS(NISSUES)
+           int& KS,
+           int& KPOS,
+           int IPRNT)
+    {
+      // Implementation of the function logic {
   // Allocate and initialize SA, SB, SC, SD matrices
   std::vector<std::vector<double>> SA(NY, std::vector<double>(NY, 0.0));
   std::vector<std::vector<double>> SB(NY, std::vector<double>(NY, 0.0));
