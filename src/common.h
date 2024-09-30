@@ -27,19 +27,17 @@ void AMREG(
 );
 
 // Function prototypes
-void BLACKB(
-    int NP,
-    int NRESPONDENTS,
-    int NISSUES,
-    int NDIMENSIONS,
-    int NF,
-    const Eigen::MatrixXd& XBIGONE,    // XBIGONE(NRESPONDENTS, NISSUES)
-    Eigen::MatrixXd& XDATA,            // XDATA(NRESPONDENTS, NDIMENSIONS)
-    Eigen::MatrixXd& W,                // W(NISSUES, NDIMENSIONS+2)
-    double& SVSUM,
-    Eigen::VectorXd& FITS2,            // FITS2(6)
-    int IPRNT
-);
+void BLACKB(int NP,
+            int NRESPONDENTS,
+            int NISSUES,
+            int NDIMENSIONS,
+            int NF,
+            Eigen::MatrixXd& XBIGONE,     // XBIGONE(NRESPONDENTS, NISSUES)
+            Eigen::MatrixXd& XDATA,             // XDATA(NRESPONDENTS, NDIMENSIONS)
+            Eigen::MatrixXd& W,                 // W(NISSUES, NDIMENSIONS+2)
+            double& SVSUM,                      // Scalar double variable
+            Eigen::VectorXd& FITS2,             // FITS2(6)
+            int IPRNT);
 
 void BLACKBT(
     int NRESPONDENTS,

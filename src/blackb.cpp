@@ -1,62 +1,45 @@
 #include <RcppEigen.h>
-#include "common.h"
 
-using namespace Rcpp;
-using Eigen::MatrixXd;  // For dynamic matrices
-using Eigen::VectorXd;  // For dynamic vectors
-using Eigen::VectorXi;  // For integer vectors
-
-// [[Rcpp::depends(RcppEigen)]]
-
-// [[Rcpp::export]]
-void BLACKB(
-    int NP,
-    int NRESPONDENTS,
-    int NISSUES,
-    int NDIMENSIONS,
-    int NF,
-    const Eigen::MatrixXd& XBIGONE,    // XBIGONE(NRESPONDENTS, NISSUES)
-    Eigen::MatrixXd& XDATA,            // XDATA(NRESPONDENTS, NDIMENSIONS)
-    Eigen::MatrixXd& W,                // W(NISSUES, NDIMENSIONS+2)
-    double& SVSUM,
-    Eigen::VectorXd& FITS2,            // FITS2(6)
-    int IPRNT
-)
+// Function definition
+void BLACKB(int NP,
+            int NRESPONDENTS,
+            int NISSUES,
+            int NDIMENSIONS,
+            int NF,
+            Eigen::MatrixXd& XBIGONE,     // XBIGONE(NRESPONDENTS, NISSUES)
+            Eigen::MatrixXd& XDATA,             // XDATA(NRESPONDENTS, NDIMENSIONS)
+            Eigen::MatrixXd& W,                 // W(NISSUES, NDIMENSIONS+2)
+            double& SVSUM,                      // Scalar double variable
+            Eigen::VectorXd& FITS2,             // FITS2(6)
+            int IPRNT)
 {
-  // Variable declarations
-  int NY = NISSUES;
-  int NF1 = NF + 1;
-  int LWORK = 3 * NRESPONDENTS + 3 * NISSUES;
+  // Declare and allocate vectors and matrices
+  Eigen::VectorXi LL = Eigen::VectorXi::Zero(NISSUES);               // LL(NISSUES)
+  Eigen::VectorXi MPOS = Eigen::VectorXi::Zero(NISSUES);             // MPOS(NISSUES)
+  Eigen::VectorXd XX = Eigen::VectorXd::Zero(2 * NISSUES);           // XX(2 * NISSUES)
+  Eigen::VectorXd D = Eigen::VectorXd::Zero(NISSUES);                // D(NISSUES)
+  Eigen::VectorXd DD = Eigen::VectorXd::Zero(NISSUES);               // DD(NISSUES)
+  Eigen::VectorXd DC = Eigen::VectorXd::Zero(NISSUES);               // DC(NISSUES)
+  Eigen::VectorXd CC = Eigen::VectorXd::Zero(NISSUES);               // CC(NISSUES)
+  Eigen::VectorXd TSUM = Eigen::VectorXd::Zero(2 * NISSUES);         // TSUM(2 * NISSUES)
+  Eigen::VectorXd DDD = Eigen::VectorXd::Zero(NISSUES);              // DDD(NISSUES)
+  Eigen::VectorXd DX = Eigen::VectorXd::Zero(NISSUES);               // DX(NISSUES)
+  Eigen::VectorXd YHAT = Eigen::VectorXd::Zero(NISSUES);             // YHAT(NISSUES)
+  Eigen::VectorXd WORK = Eigen::VectorXd::Zero(3 * NRESPONDENTS + 3 * NISSUES); // WORK(3*NRESPONDENTS + 3*NISSUES)
 
-  // Integer vectors
-  VectorXi LL(NY);
-  VectorXi MPOS(NY);
+  Eigen::MatrixXd X = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES);  // X(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd PSIX = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // PSIX(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd XS = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // XS(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd R = Eigen::MatrixXd::Zero(NISSUES, NISSUES);       // R(NISSUES, NISSUES)
+  Eigen::MatrixXd ROOTC = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // ROOTC(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd CROOT = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // CROOT(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd XT = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // XT(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd XSS = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // XSS(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd UUU = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // UUU(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd VVV = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // VVV(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd WSAVE = Eigen::MatrixXd::Zero(NISSUES, 2 * NDIMENSIONS); // WSAVE(NISSUES, 2 * NDIMENSIONS)
+  Eigen::MatrixXd XSAVE = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES); // XSAVE(NRESPONDENTS, NISSUES)
 
-  // Double vectors
-  VectorXd XX(2 * NY);
-  VectorXd D(NY);
-  VectorXd DD(NY);
-  VectorXd DC(NY);
-  VectorXd CC(NY);
-  VectorXd TSUM(2 * NY);
-  VectorXd DDD(NY);
-  VectorXd DX(NY);
-  VectorXd YHAT(NY);
-  VectorXd WORK(LWORK);
-
-  // Double matrices
-  MatrixXd X(NP, NY);
-  MatrixXd PSIX(NP, NY);
-  MatrixXd XS(NP, NY);
-  MatrixXd R(NY, NY);
-  MatrixXd ROOTC(NP, NY);
-  MatrixXd CROOT(NP, NY);
-  MatrixXd XT(NP, NY);
-  MatrixXd XSS(NP, NY);
-  MatrixXd UUU(NP, NY);
-  MatrixXd VVV(NP, NY);
-  MatrixXd WSAVE(NY, 2 * NDIMENSIONS);
-  MatrixXd XSAVE(NP, NY);
 
   // Initialize variables
   LL.setZero();

@@ -35,26 +35,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// BLACKB
-void BLACKB(int NP, int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NF, const Eigen::MatrixXd& XBIGONE, Eigen::MatrixXd& XDATA, Eigen::MatrixXd& W, double& SVSUM, Eigen::VectorXd& FITS2, int IPRNT);
-RcppExport SEXP _basicspace_BLACKB(SEXP NPSEXP, SEXP NRESPONDENTSSEXP, SEXP NISSUESSEXP, SEXP NDIMENSIONSSEXP, SEXP NFSEXP, SEXP XBIGONESEXP, SEXP XDATASEXP, SEXP WSEXP, SEXP SVSUMSEXP, SEXP FITS2SEXP, SEXP IPRNTSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type NP(NPSEXP);
-    Rcpp::traits::input_parameter< int >::type NRESPONDENTS(NRESPONDENTSSEXP);
-    Rcpp::traits::input_parameter< int >::type NISSUES(NISSUESSEXP);
-    Rcpp::traits::input_parameter< int >::type NDIMENSIONS(NDIMENSIONSSEXP);
-    Rcpp::traits::input_parameter< int >::type NF(NFSEXP);
-    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type XBIGONE(XBIGONESEXP);
-    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type XDATA(XDATASEXP);
-    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type W(WSEXP);
-    Rcpp::traits::input_parameter< double& >::type SVSUM(SVSUMSEXP);
-    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type FITS2(FITS2SEXP);
-    Rcpp::traits::input_parameter< int >::type IPRNT(IPRNTSEXP);
-    BLACKB(NP, NRESPONDENTS, NISSUES, NDIMENSIONS, NF, XBIGONE, XDATA, W, SVSUM, FITS2, IPRNT);
-    return R_NilValue;
-END_RCPP
-}
 // BLACKBOXF
 void BLACKBOXF(int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NMISSING, Eigen::MatrixXd& KMISS, int MINSCALE, Eigen::VectorXi& MID, Eigen::MatrixXd& KISSUE, Eigen::VectorXd& FITS, Eigen::MatrixXd& PSIMATRIX, Eigen::MatrixXd& WMATRIX, Eigen::VectorXi& LRESPONDENTS, Eigen::VectorXi& LMARK, Eigen::VectorXd& FITS2, int& EXITSTATUS);
 RcppExport SEXP _basicspace_BLACKBOXF(SEXP NRESPONDENTSSEXP, SEXP NISSUESSEXP, SEXP NDIMENSIONSSEXP, SEXP NMISSINGSEXP, SEXP KMISSSEXP, SEXP MINSCALESEXP, SEXP MIDSEXP, SEXP KISSUESEXP, SEXP FITSSEXP, SEXP PSIMATRIXSEXP, SEXP WMATRIXSEXP, SEXP LRESPONDENTSSEXP, SEXP LMARKSEXP, SEXP FITS2SEXP, SEXP EXITSTATUSSEXP) {
@@ -410,7 +390,6 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_basicspace_AMREG", (DL_FUNC) &_basicspace_AMREG, 15},
-    {"_basicspace_BLACKB", (DL_FUNC) &_basicspace_BLACKB, 11},
     {"_basicspace_BLACKBOXF", (DL_FUNC) &_basicspace_BLACKBOXF, 15},
     {"_basicspace_BLACKBOXT", (DL_FUNC) &_basicspace_BLACKBOXT, 15},
     {"_basicspace_BLACKBT", (DL_FUNC) &_basicspace_BLACKBT, 12},
