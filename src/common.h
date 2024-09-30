@@ -105,16 +105,16 @@ void REG(int NRESPONDENTS,
          int NP,
          int NF,
          int NY,
-         std::vector<double>& TSUM,
-         Eigen::MatrixXd& W,
-         Eigen::MatrixXd& XS,
-         Eigen::MatrixXd& X,
-         Eigen::MatrixXd& PSI,
+         Eigen::VectorXd& TSUM,                // TSUM(2 * NISSUES)
+         Eigen::MatrixXd& W,                   // W(NISSUES, NDIMENSIONS+2)
+         Eigen::MatrixXd& XS,                  // XS(NRESPONDENTS, NISSUES)
+         Eigen::MatrixXd& X,                   // X(NRESPONDENTS, NISSUES)
+         Eigen::MatrixXd& PSI,                 // PSI(NRESPONDENTS, NISSUES)
          int IPRNT,
          int ILAST,
          int KKK,
-         double& AREG,
-         double& BREG);
+         double AREG,
+         double BREG);
 
 void REG2(int NRESPONDENTS,
           int NISSUES,

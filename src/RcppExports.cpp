@@ -56,7 +56,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // BLACKBOXF
-void BLACKBOXF(int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NMISSING, const Eigen::MatrixXd& KMISS, int MINSCALE, const Eigen::VectorXi& MID, const Eigen::MatrixXd& KISSUE, Eigen::VectorXd& FITS, Eigen::MatrixXd& PSIMATRIX, Eigen::MatrixXd& WMATRIX, Eigen::VectorXi& LRESPONDENTS, Eigen::VectorXi& LMARK, Eigen::VectorXd& FITS2, int& EXITSTATUS);
+void BLACKBOXF(int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NMISSING, Eigen::MatrixXd& KMISS, int MINSCALE, Eigen::VectorXi& MID, Eigen::MatrixXd& KISSUE, Eigen::VectorXd& FITS, Eigen::MatrixXd& PSIMATRIX, Eigen::MatrixXd& WMATRIX, Eigen::VectorXi& LRESPONDENTS, Eigen::VectorXi& LMARK, Eigen::VectorXd& FITS2, int& EXITSTATUS);
 RcppExport SEXP _basicspace_BLACKBOXF(SEXP NRESPONDENTSSEXP, SEXP NISSUESSEXP, SEXP NDIMENSIONSSEXP, SEXP NMISSINGSEXP, SEXP KMISSSEXP, SEXP MINSCALESEXP, SEXP MIDSEXP, SEXP KISSUESEXP, SEXP FITSSEXP, SEXP PSIMATRIXSEXP, SEXP WMATRIXSEXP, SEXP LRESPONDENTSSEXP, SEXP LMARKSEXP, SEXP FITS2SEXP, SEXP EXITSTATUSSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -64,10 +64,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type NISSUES(NISSUESSEXP);
     Rcpp::traits::input_parameter< int >::type NDIMENSIONS(NDIMENSIONSSEXP);
     Rcpp::traits::input_parameter< int >::type NMISSING(NMISSINGSEXP);
-    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type KMISS(KMISSSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type KMISS(KMISSSEXP);
     Rcpp::traits::input_parameter< int >::type MINSCALE(MINSCALESEXP);
-    Rcpp::traits::input_parameter< const Eigen::VectorXi& >::type MID(MIDSEXP);
-    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type KISSUE(KISSUESEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXi& >::type MID(MIDSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type KISSUE(KISSUESEXP);
     Rcpp::traits::input_parameter< Eigen::VectorXd& >::type FITS(FITSSEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type PSIMATRIX(PSIMATRIXSEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type WMATRIX(WMATRIXSEXP);
@@ -187,7 +187,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // REG
-void REG(int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NP, int NF, int NY, std::vector<double>& TSUM, Eigen::MatrixXd& W, Eigen::MatrixXd& XS, Eigen::MatrixXd& X, Eigen::MatrixXd& PSI, int IPRNT, int ILAST, int KKK, double& AREG, double& BREG);
+void REG(int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NP, int NF, int NY, Eigen::VectorXd& TSUM, Eigen::MatrixXd& W, Eigen::MatrixXd& XS, Eigen::MatrixXd& X, Eigen::MatrixXd& PSI, int IPRNT, int ILAST, int KKK, double& AREG, double& BREG);
 RcppExport SEXP _basicspace_REG(SEXP NRESPONDENTSSEXP, SEXP NISSUESSEXP, SEXP NDIMENSIONSSEXP, SEXP NPSEXP, SEXP NFSEXP, SEXP NYSEXP, SEXP TSUMSEXP, SEXP WSEXP, SEXP XSSEXP, SEXP XSEXP, SEXP PSISEXP, SEXP IPRNTSEXP, SEXP ILASTSEXP, SEXP KKKSEXP, SEXP AREGSEXP, SEXP BREGSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -197,7 +197,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type NP(NPSEXP);
     Rcpp::traits::input_parameter< int >::type NF(NFSEXP);
     Rcpp::traits::input_parameter< int >::type NY(NYSEXP);
-    Rcpp::traits::input_parameter< std::vector<double>& >::type TSUM(TSUMSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type TSUM(TSUMSEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type W(WSEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type XS(XSSEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type X(XSEXP);

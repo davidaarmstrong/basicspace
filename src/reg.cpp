@@ -6,29 +6,39 @@ using Eigen::VectorXd;  // For dynamic vectors
 // [[Rcpp::depends(RcppEigen)]]
 
 // [[Rcpp::export]]
-void REG(int NRESPONDENTS, int NISSUES, int NDIMENSIONS, int NP, int NF, int NY,
-         std::vector<double>& TSUM,
-         Eigen::MatrixXd& W,
-         Eigen::MatrixXd& XS,
-         Eigen::MatrixXd& X,
-         Eigen::MatrixXd& PSI,
-         int IPRNT, int ILAST, int KKK, double& AREG, double& BREG)
+void REG(int NRESPONDENTS,
+         int NISSUES,
+         int NDIMENSIONS,
+         int NP,
+         int NF,
+         int NY,
+         Eigen::VectorXd& TSUM,                // TSUM(2 * NISSUES)
+         Eigen::MatrixXd& W,                   // W(NISSUES, NDIMENSIONS+2)
+         Eigen::MatrixXd& XS,                  // XS(NRESPONDENTS, NISSUES)
+         Eigen::MatrixXd& X,                   // X(NRESPONDENTS, NISSUES)
+         Eigen::MatrixXd& PSI,                 // PSI(NRESPONDENTS, NISSUES)
+         int IPRNT,
+         int ILAST,
+         int KKK,
+         double& AREG,
+         double& BREG)
 {
   // Declare and allocate variables
-  std::vector<int> LLL(NISSUES, 0);
-  std::vector<int> LL(NISSUES, 0);
-  std::vector<int> MPOS(NISSUES, 0);
-  std::vector<double> C(NISSUES, 0.0);
-  std::vector<double> RSUM(NISSUES, 0.0);
+  Eigen::VectorXi LLL = Eigen::VectorXi::Zero(NISSUES);        // LLL(NISSUES)
+  Eigen::VectorXi LL = Eigen::VectorXi::Zero(NISSUES);         // LL(NISSUES)
+  Eigen::VectorXi MPOS = Eigen::VectorXi::Zero(NISSUES);       // MPOS(NISSUES)
+  Eigen::VectorXd C = Eigen::VectorXd::Zero(NISSUES);          // C(NISSUES)
+  Eigen::VectorXd RSUM = Eigen::VectorXd::Zero(NISSUES);       // RSUM(NISSUES)
+  Eigen::VectorXd WVEC = Eigen::VectorXd::Zero(3 * NDIMENSIONS); // WVEC(3*NDIMENSIONS)
+  Eigen::VectorXd WK = Eigen::VectorXd::Zero(40 * NDIMENSIONS);  // WK(40*NDIMENSIONS)
 
-  Eigen::VectorXd WVEC(3 * NDIMENSIONS);
-  Eigen::VectorXd WK(40 * NDIMENSIONS);
-  Eigen::MatrixXd A(3 * NDIMENSIONS, 3 * NDIMENSIONS);
-  Eigen::MatrixXd B(3 * NDIMENSIONS, 3 * NDIMENSIONS);
-  Eigen::MatrixXd XT(NRESPONDENTS, NISSUES);
-  Eigen::MatrixXd R(NISSUES, NISSUES);
-  Eigen::MatrixXd ZMAT(3 * NDIMENSIONS, 3 * NDIMENSIONS);
+  Eigen::MatrixXd A_mat = Eigen::MatrixXd::Zero(3 * NDIMENSIONS, 3 * NDIMENSIONS); // A(3*NDIMENSIONS, 3*NDIMENSIONS)
+  Eigen::MatrixXd B_mat = Eigen::MatrixXd::Zero(3 * NDIMENSIONS, 3 * NDIMENSIONS); // B(3*NDIMENSIONS, 3*NDIMENSIONS)
+  Eigen::MatrixXd XT = Eigen::MatrixXd::Zero(NRESPONDENTS, NISSUES);               // XT(NRESPONDENTS, NISSUES)
+  Eigen::MatrixXd R_mat = Eigen::MatrixXd::Zero(NISSUES, NISSUES);                 // R(NISSUES, NISSUES)
+  Eigen::MatrixXd ZMAT = Eigen::MatrixXd::Zero(3 * NDIMENSIONS, 3 * NDIMENSIONS);  // ZMAT(3*NDIMENSIONS, 3*NDIMENSIONS)
 
+  // The rest of the function logic goes here...
   double H1947 = BREG;
   int KPX1947 = KKK;
 

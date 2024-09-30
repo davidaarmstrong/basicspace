@@ -1,4 +1,6 @@
 #include <RcppEigen.h>
+#include "common.h"
+
 using namespace Rcpp;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -13,10 +15,10 @@ void BLACKBOXF(
     int NISSUES,
     int NDIMENSIONS,
     int NMISSING,
-    const Eigen::MatrixXd& KMISS,          // KMISS(NISSUES, NMISSING)
+    Eigen::MatrixXd& KMISS,          // KMISS(NISSUES, NMISSING)
     int MINSCALE,
-    const Eigen::VectorXi& MID,            // MID(NRESPONDENTS)
-    const Eigen::MatrixXd& KISSUE,         // KISSUE(NRESPONDENTS, NISSUES)
+    Eigen::VectorXi& MID,            // MID(NRESPONDENTS)
+    Eigen::MatrixXd& KISSUE,         // KISSUE(NRESPONDENTS, NISSUES)
     Eigen::VectorXd& FITS,                 // FITS(7 * NDIMENSIONS)
     Eigen::MatrixXd& PSIMATRIX,            // PSIMATRIX (size depends on NDIMENSIONS)
     Eigen::MatrixXd& WMATRIX,              // WMATRIX (size depends on NDIMENSIONS)
